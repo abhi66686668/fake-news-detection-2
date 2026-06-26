@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fake News Detector</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+            </div>
+            
+            <h1>AI Fake News Detector</h1>
+            
+            <p class="subtitle">
+                Paste an article below to instantly analyze its authenticity using our advanced Machine Learning model.
+            </p>
+            
+            <form method="POST">
+                <textarea 
+                    name="news" 
+                    placeholder="Paste the news article text here..." 
+                    required></textarea>
+                
+                <button type="submit">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    Analyze Authenticity
+                </button>
+            </form>
+            
+            {% if prediction %}
+            <div class="result {% if prediction == 'REAL NEWS' %}real{% else %}fake{% endif %}">
+                <i class="fas {% if prediction == 'REAL NEWS' %}fa-check-circle{% else %}fa-triangle-exclamation{% endif %}"></i> 
+                {{ prediction }}
+            </div>
+            {% endif %}
+            
+        </div>
+    </div>
+
+</body>
+</html>
